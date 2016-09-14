@@ -4,10 +4,14 @@
 clear all
 close all
 
-count=4;
+count=4; % numbver of time the whole loop is iterated
 generateData=1; 
 % 1, prompts the user for new data
 % 0, run based on last data, this is faster
+M=256;
+N=256;
+P=256;
+A=uint16(zeros(M,N,P));
 
 if(generateData==1)
     cellData=bfopen %Requires bioformat path to be added

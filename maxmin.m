@@ -1,6 +1,6 @@
 
 function y=maxmin(data)
-data1=data(20:end-40)
+data1=data(20:end-40);
 
 plot(data1)
 
@@ -11,7 +11,7 @@ plot(data1)
 % 
 % hold on
 % plot(MaxIdx, Maxima,'ro')
-e=exp(1)
+e=exp(1);
 
 [maxVal maxIndex]=max(data1);
 minVal=maxVal/e;
