@@ -13,20 +13,37 @@
 close all
 clear all
 
-bin=5;
-generateData=2;
-M=256;
+bin=1;
+M=1024;
 N=256;
 P=256;
 A=zeros(M,N,P);
+noOfBin=1024;
+
 % 1, prompts the user for new data
 % 0, run based on last data, this is faster
+% Construct a questdlg with three options
+
+choice = questdlg('Would you like to load new data?', ...
+	'choice','Yes, new data','use saved data','default');
+% Handle response
+switch choice
+    case 'Yes, new data'
+        generateData = 1;
+    case 'use saved data'
+        generateData = 0;
+    case 'default'
+        return;
+end
+
+
+
 
 if(generateData==1)
     cellData=bfopen %Requires bioformat path to be added
     data3D=cellData{1,1}(:,1);%taking the 3d array with decay
     
-    for k = 1:256
+    for k = 1:noOfBin
         A(k,:,:) = data3D{k};
     end
     save A
@@ -40,7 +57,7 @@ end
 
 margin=bin+1; %from where data collection will actually start
 im=zeros(N-margin*2,P-margin*2); 
-decayIM=zeros(N-margin*2,P-margin*2,256);
+decayIM=zeros(N-margin*2,P-margin*2,noOfBin);
 maxMatrix=double(zeros(N-margin*2,P-margin*2)); %matrix with delay of decay in every pixel
 
 
@@ -57,7 +74,7 @@ for i=margin:N-margin
 
         pixVal=squeeze(g);
         [loc maxVal]=max(g);%finding the location of the peak
-        maxMatrix(i-bin,j-bin)=double(loc)*12.5/256;
+        maxMatrix(i-bin,j-bin)=double(loc)*12.5/noOfBin;
         im(i-bin,j-bin)=sum(pixVal);
         decayIM(i-bin,j-bin,:)=g;
     end

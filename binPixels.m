@@ -15,7 +15,7 @@ generateData=1;
 % 0, run based on last data, this is faster
 
 if(generateData==1)
-    cellData=bfopen %Requires bioformat path to be added
+    cellData=bfopen %Requires bioformat path to be addedw
     data3D=cellData{1,1}(:,1);%taking the 3d array with decay
     
     for k = 1:256
