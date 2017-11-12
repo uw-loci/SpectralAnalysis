@@ -13,12 +13,12 @@
 close all
 clear all
 
-bin=1;
-M=1024;
+bin=2;
+M=256;
 N=256;
 P=256;
 A=zeros(M,N,P);
-noOfBin=1024;
+noOfBin=256;
 
 % 1, prompts the user for new data
 % 0, run based on last data, this is faster
@@ -73,7 +73,7 @@ for i=margin:N-margin
         g=sum(sum(g,2),3);
 
         pixVal=squeeze(g);
-        [loc maxVal]=max(g);%finding the location of the peak
+        [ maxVal loc]=max(g);%finding the location of the peak
         maxMatrix(i-bin,j-bin)=double(loc)*12.5/noOfBin;
         im(i-bin,j-bin)=sum(pixVal);
         decayIM(i-bin,j-bin,:)=g;

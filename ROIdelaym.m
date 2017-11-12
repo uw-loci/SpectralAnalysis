@@ -1,4 +1,4 @@
-% This program allows the user to draw ROI and calculate delay of that
+% This program allows the user to draw ROI and calculate delay and rise time of that
 % sepcific region
 
 clear all

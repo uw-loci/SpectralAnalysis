@@ -69,17 +69,17 @@ for i=margin:N-margin
 %         A(:,i-1,j+1)+A(:,i,j+1)+A(:,i+1,j+1);
     
         
-        g=A(:,i-bin:i+bin,j-bin:j+bin);
-        g=sum(sum(g,2),3);
+        gg=A(:,i-bin:i+bin,j-bin:j+bin);
+        g=sum(sum(gg,2),3);
 
         pixVal=squeeze(g);
-        [loc maxVal]=max(g);%finding the location of the peak
-        maxMatrix(i-bin,j-bin)=double(loc)*12.5/noOfBin;
+        [maxVal loc]=max(g);%finding the location of the peak
+        maxMatrix(i-bin,j-bin)=double(maxVal)*12.5/noOfBin;
         im(i-bin,j-bin)=sum(pixVal);
         decayIM(i-bin,j-bin,:)=g;
     end
     
-;
+
 end
 
 imshow(im/max(max(im)))

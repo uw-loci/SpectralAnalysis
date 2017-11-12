@@ -1,6 +1,7 @@
 
 function y=maxmin(data)
-data1=data(20:end-40);
+%This function calcualates the rise time for a given decay
+data1=data(20:end);
 
 plot(data1)
 
