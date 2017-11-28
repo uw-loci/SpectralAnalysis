@@ -6,7 +6,7 @@ clear all
 close all
 
 count=2;
-generateData=0; 
+generateData=1; 
 % 1, prompts the user for new data
 % 0, run based on last data, this is faster
 
@@ -21,7 +21,7 @@ if(generateData==1)
 
     save A
 else
-    load A
+    load A A
 
 end
 num_images=256;
@@ -59,9 +59,12 @@ while(count>0)
     count=count-1;
 end
 
-plot(timebinsPlotter(1,:)/max(timebinsPlotter(1,:)),'g');
+x_time=1:256;
+x_time=x_time/256*12.5;
+
+plot(x_time,timebinsPlotter(1,:)/max(timebinsPlotter(1,:)),'g');
 hold on
-plot(timebinsPlotter(2,:)/max(timebinsPlotter(2,:)),'r');
-title('3m fiber');
+plot(x_time,timebinsPlotter(2,:)/max(timebinsPlotter(2,:)),'y');
+title('30m 62.5um core fiber');
 
 difference_in_peak=(delayarray(1)-delayarray(2))*12.5/256
