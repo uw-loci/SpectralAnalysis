@@ -104,7 +104,9 @@ minValue=min(min(DelayMatrix));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%delay to wavelength conversion%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-waveMap=DelaytoWavelength(minValue,DelayMatrix);
+DelayMatrix(find(DelayMatrix>4.5))=0;
+waveMap=DelaytoWavelength30mFujikura(3.3,DelayMatrix);
+waveMap(find(waveMap<0))=0;
 figure, imshow(waveMap)
 % figure, imshow(indexedImage)
 colormap(jet(100))
