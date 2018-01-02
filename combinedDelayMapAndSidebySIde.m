@@ -143,8 +143,8 @@ x_time=x_time/256*12.5;
 
 plot(x_time,timebinsPlotter(1,:)/max(timebinsPlotter(1,:)),'g');
 hold on
-plot(x_time,timebinsPlotter(2,:)/max(timebinsPlotter(2,:)),'y');
-title('30m 800um core fiber');
+plot(x_time,timebinsPlotter(2,:)/max(timebinsPlotter(2,:)),'r');
+title('No fiber');
 
 difference_in_peak=(delayarray(1)-delayarray(2))*12.5/256
 
