@@ -52,7 +52,7 @@ else
 end
 
 bin=2;
-
+tic
 
 
 [M, N, P]=size(A);
@@ -92,7 +92,7 @@ end
 %  maxMatrix(maxMatrix>4.5)=0;
 % 
 % indexedImage = gray2ind(maxMatrix, 10);
-figure, imshow(DelayMatrix)
+figure, imshow(flip(DelayMatrix))
 % figure, imshow(indexedImage)
 colormap(jet(100))
 caxis('auto')
@@ -100,23 +100,35 @@ colorbar
 
 maxValue=max(max(DelayMatrix));
 minValue=min(min(DelayMatrix));
-
+toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%delay to wavelength conversion%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-DelayMatrix(find(DelayMatrix>4.5))=0;
-waveMap=DelaytoWavelength30mFujikura(3.3,DelayMatrix);
+% DelayMatrix(find(DelayMatrix<5))=0;
+% DelayMatrix(find(DelayMatrix>8))=0;
+% waveMap=DelaytoWavelength30mCorning(minValue,DelayMatrix);
+
+waveMap=DelaytoWavelength30mFujikura(minValue,DelayMatrix);
+
+% waveMap=DelayMatrix-minValue;
 waveMap(find(waveMap<0))=0;
-figure, imshow(waveMap)
+figure, 
+figg=imshow((waveMap));
 % figure, imshow(indexedImage)
 colormap(jet(100))
 caxis('auto')
+% caxis([0 100])
 colorbar
-
+% 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%histogram calcualtion%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-range=linspace(min(min(DelayMatrix)),max(max(DelayMatrix)),20);
+% range=linspace(min(min(DelayMatrix)),max(max(DelayMatrix)),20);
+% gg=histc(DelayMatrix(:),range);
+% figure,semilogy(range,gg)
+
+range=linspace(min(min(DelayMatrix)),max(max(DelayMatrix)),256);
+range=linspace(0,12.5,256);
 gg=histc(DelayMatrix(:),range);
 figure,semilogy(range,gg)
